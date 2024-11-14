@@ -1,14 +1,9 @@
 import { Router } from 'express';
-import isValidKey from '@src/middleware/VerifyApiKey';
-import authRoutes from '@routers/auth/index';
-import passportRouter from '@routers/passport/index';
-import userRouter from '@routers/user/index';
+
+import isValidKey from '../middlewares/VerifyApiKey';
+import userRouter from './user/user.router';
 
 const router = Router();
-
 router.use(isValidKey);
-router.use('/auth', authRoutes);
-router.use('/passport', passportRouter);
-router.use('/user', userRouter);
-
+router.use('/users', userRouter);
 export default router;

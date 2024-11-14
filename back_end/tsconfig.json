@@ -1,53 +1,33 @@
 {
-   "compilerOptions": {
-      "target": "ES2020",
-      "module": "CommonJS",
-      "moduleResolution": "Node",
-      "outDir": "./dist",
-      "forceConsistentCasingInFileNames": true,
-      "noImplicitAny": true,
-      "skipLibCheck": true,
-      "strict": true,
-      "strictPropertyInitialization": false,
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "allowJs": true,
-      "esModuleInterop": true,
-      "resolveJsonModule": true,
-      "baseUrl": "./",
-      "paths": {
-         "@src/*": [
-            "src/*"
-          ],
-         "@routers/*": [
-            "src/routers/*"
-         ],
-         "@services/*": [
-            "src/services/*"
-         ],
-         "@repositories/*": [
-            "src/repositories/*"
-         ],
-         "@controllers/*": [
-            "src/controllers/*"
-         ],
-         "@entity/*": [
-            "src/entity/*"
-         ],
-         "@middleware/*": [
-            "src/middleware/*"
-         ],
-         "@dto/*": [
-            "src/dto/*"
-         ],
-         "@helper/*": [
-            "src/helper/*"
-         ],
-      }
-   },
-   "include": [
-      "src/**/*.ts",
-      "types/**/*.d.ts",
-   ],
-   "exclude": ["node_modules", "dist"]
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "outDir": "./dist",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "baseUrl": "./"
+    // "paths": {
+    //   "@src/*": ["src/*"],
+    //   "@routers/*": ["src/routers/*"],
+    //   "@services/*": ["src/services/*"],
+    //   "@repositories/*": ["src/repositories/*"],
+    //   "@controllers/*": ["src/controllers/*"],
+    //   "@entity/*": ["src/entities/*"],
+    //   "@middleware/*": ["src/middleware/*"],
+    //   "@dto/*": ["src/dto/*"],
+    //   "@helper/*": ["src/helper/*"],
+    //   "@database/*": ["src/database/*"]
+    // }
+  },
+  "include": ["src/**/*.ts", "types/**/*.d.ts"],
+  "exclude": ["node_modules", "dist"]
 }

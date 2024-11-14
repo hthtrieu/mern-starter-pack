@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { S3 } from 'aws-sdk';
 import { Service } from 'typedi';
-import { s3Config } from '@src/core/config';
+import { s3Config } from '@src/common/configs/config';
 
 import { IUploadService } from './IUploadService';
 
