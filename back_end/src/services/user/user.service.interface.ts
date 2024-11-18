@@ -1,8 +1,9 @@
-import { UpdateUserDTO } from '../../dtos/user/update-user.dto';
-import { UserDomain } from '../../dtos/user/user.domain';
+import { CreateUserDto } from '../../adapter/dtos/user/create-user.dto';
+import { UpdateUserDTO } from '../../adapter/dtos/user/update-user.dto';
+import { UserDomain } from '../../domain/user.domain';
 
 export interface UserServiceInterface {
-  getAllUsers: () => Promise<UserDomain[]>;
+  createUser: (userData: CreateUserDto) => Promise<UserDomain>;
 
-  updateUser: (data: UpdateUserDTO) => Promise<UserDomain>;
+  findUserByUsername: (username: string) => Promise<UserDomain | null>;
 }

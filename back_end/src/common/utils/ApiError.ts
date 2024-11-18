@@ -107,7 +107,7 @@ export class TokenExpiredError extends ApiError {
   }
 }
 
-export class NoDataError extends ApiError {
+export class NoDataFound extends ApiError {
   constructor(message = 'No data available') {
     super(ErrorType.NO_DATA, message);
   }
@@ -116,5 +116,11 @@ export class NoDataError extends ApiError {
 export class AccessTokenError extends ApiError {
   constructor(message = 'Invalid access token') {
     super(ErrorType.ACCESS_TOKEN, message);
+  }
+}
+
+export class ExistedEmail extends ApiError {
+  constructor(message = 'Existed Email') {
+    super(ErrorType.INTERNAL, message);
   }
 }

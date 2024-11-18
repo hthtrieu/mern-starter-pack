@@ -1,0 +1,44 @@
+import {
+  BeforeInsert,
+  BeforeUpdate,
+  Column,
+  Generated,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+
+export class BaseEntity {
+  @PrimaryGeneratedColumn('increment')
+  id: number;
+
+  @Column({
+    nullable: true,
+    default: () => 'NOW()',
+  })
+  created_at: Date;
+
+  @Column({
+    nullable: true,
+  })
+  created_by: string;
+
+  @Column({
+    nullable: true,
+  })
+  updated_at: Date;
+
+  @Column({
+    nullable: true,
+  })
+  updated_by: string;
+
+  @Column({
+    nullable: true,
+    // default: "NOW()"
+  })
+  deleted_at: Date;
+
+  @Column({
+    nullable: true,
+  })
+  deleted_by: string;
+}

@@ -1,4 +1,5 @@
 import { routerPaths } from '@/routes/path';
+import { getProfileAction, loginAction } from '@/store/auth/slice';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -23,7 +24,6 @@ import { Form } from '@/components/ui/form';
 // import { Link } from "react-router-dom"
 import { Separator } from '@/components/ui/separator';
 import { toast } from '@/components/ui/use-toast';
-import { getProfileAction, loginAction } from '@/store/auth/slice';
 import Constants from '@/lib/Constants';
 
 const BACKEND_URL = import.meta.env.VITE_API_URL;
@@ -85,7 +85,7 @@ export function LoginForm(props: any) {
     navigate(routerPaths.FORGOT_PASSWORD);
   };
   const googleAuth = () => {
-    window.open(`${BACKEND_URL}/passport/google`, '_self');
+    window.open(`${BACKEND_URL}/auth/login-google`, '_self');
   };
   return (
     <>
@@ -140,20 +140,23 @@ export function LoginForm(props: any) {
         </CardContent>
 
         <CardFooter className="flex w-full flex-col">
-          {/* <div className="flex justify-between items-center w-full">
-                        <Separator className="w-1/3" />
-                        <span>or</span>
-                        <Separator className="w-1/3" />
-                    </div> */}
-          {/* <div className="w-full">
-                        <Button
-                            type="button"
-                            variant={"outline"}
-                            onClick={() => { googleAuth() }}
-                            className="m-auto w-full dark:bg-red-400 bg-white my-2 text-rose-500 dark:text-white">
-                            <GoogleIcon /> <span className="ml-2">Sign in with Google</span>
-                        </Button>
-                    </div> */}
+          <div className="flex w-full items-center justify-between">
+            <Separator className="w-1/3" />
+            <span>or</span>
+            <Separator className="w-1/3" />
+          </div>
+          <div className="w-full">
+            <Button
+              type="button"
+              variant={'outline'}
+              onClick={() => {
+                googleAuth();
+              }}
+              className="m-auto my-2 w-full bg-white text-rose-500 dark:bg-red-400 dark:text-white"
+            >
+              <GoogleIcon /> <span className="ml-2">Sign in with Google</span>
+            </Button>
+          </div>
         </CardFooter>
       </Card>
       {/* // )} */}

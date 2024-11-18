@@ -17,7 +17,7 @@ enum ResponseStatus {
   INTERNAL_ERROR = 500,
 }
 
-abstract class ApiResponse {
+export abstract class ApiResponse {
   constructor(
     protected statusCode: StatusCode,
     protected status: ResponseStatus,

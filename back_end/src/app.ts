@@ -10,14 +10,15 @@ import passport from 'passport';
 import swaggerUI from 'swagger-ui-express';
 import YAML from 'yaml';
 
+import router from './adapter/routers/index.router';
 import {
   ApiError,
   ErrorType,
   InternalError,
   NotFoundError,
 } from './common/utils/ApiError';
-import { AppDataSource } from './database/data-source';
-import router from './routers/index.router';
+import { AppConfig } from './config/app.config';
+import { AppDataSource } from './infrastructure/database/data-source';
 
 dotenv.config();
 
@@ -52,7 +53,7 @@ try {
 
 //cors
 const corsOptions = {
-  origin: String(process.env.CLIENT_URL),
+  origin: AppConfig.client.url,
   optionsSuccessStatus: 200,
   credentials: true,
 };
@@ -71,6 +72,7 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.use('/api', router);
 // catch 404 and forward to error handler
 app.use((req, res, next) => next(new NotFoundError()));

@@ -1,15 +1,15 @@
 import { compareSync, genSaltSync, hashSync } from 'bcrypt';
 
-type IHashingPassword ={
+type IHashingPassword = {
   salt: string;
   password: string;
-}
+};
 
 type comparePasswordInput = {
   inputPassword: string;
-  password: string;
+  password?: string;
   salt?: string;
-}
+};
 
 export const hasingPassword = (inputString: string): IHashingPassword => {
   const salt: string = genSaltSync(10);
@@ -20,9 +20,10 @@ export const hasingPassword = (inputString: string): IHashingPassword => {
   };
 };
 
-export const comparePassword = (
- data: comparePasswordInput
-): boolean => {
+export const comparePassword = (data: comparePasswordInput): boolean => {
+  if (!data.password) {
+    return false;
+  }
   const result: boolean = compareSync(data.inputPassword, data.password);
   return result;
 };
