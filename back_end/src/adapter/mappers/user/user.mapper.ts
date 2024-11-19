@@ -6,7 +6,7 @@ export class UserMapper {
     const domainEntity = new UserDomain();
     domainEntity.id = raw.id;
     domainEntity.email = raw.email;
-    domainEntity.password = raw.password;
+    // domainEntity.password = raw.password;
     domainEntity.username = raw.username;
     domainEntity.role = raw.role;
     return domainEntity;

@@ -1,5 +1,5 @@
 export class UserDomain {
-  id?: number | string;
+  id?: number;
 
   email: string | null;
 

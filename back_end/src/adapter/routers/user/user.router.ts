@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import passport from 'passport';
 import { Container } from 'typedi';
 
 import { AsyncHandler } from '../../../common/utils/AsyncHandler';
@@ -12,8 +13,6 @@ const userController = Container.get(UserController);
 // const userController = new UserController();
 
 router.get('/', AsyncHandler(userController.getAllUsers));
-
-//! for test
 router.post(
   '/update/:id',
   [
@@ -22,6 +21,15 @@ router.post(
     validator(schema.userUpdate, ValidationSource.BODY),
   ],
   AsyncHandler(userController.updateUser),
+);
+
+router.get(
+  '/me',
+  [
+    validator(schema.auth, ValidationSource.HEADER),
+    passport.authenticate('jwt', { session: false }),
+  ],
+  AsyncHandler(userController.getUserProfile),
 );
 
 export default router;

@@ -5,7 +5,7 @@ import path from 'path';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { Application, NextFunction, Request, Response } from 'express';
-import session from 'express-session';
+// import session from 'express-session';
 import passport from 'passport';
 import swaggerUI from 'swagger-ui-express';
 import YAML from 'yaml';
@@ -19,6 +19,8 @@ import {
 } from './common/utils/ApiError';
 import { AppConfig } from './config/app.config';
 import { AppDataSource } from './infrastructure/database/data-source';
+
+import './services/auth/strategies/strategy-config';
 
 dotenv.config();
 
@@ -63,15 +65,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Passport
-app.use(
-  session({
-    secret: String(process.env.SESSION_KEY),
-    resave: false,
-    saveUninitialized: true,
-  }),
-);
+// app.use(
+//   session({
+//     secret: String(process.env.SESSION_KEY),
+//     resave: false,
+//     saveUninitialized: true,
+//   }),
+// );
 app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.session());
 
 app.use('/api', router);
 // catch 404 and forward to error handler

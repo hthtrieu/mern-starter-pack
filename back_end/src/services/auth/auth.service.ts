@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { Inject, Service } from 'typedi';
 
+import { JwtPayloadDto } from '../../adapter/dtos/auth/jwt-payload.dto';
 import { JwtDto } from '../../adapter/dtos/auth/jwt.dto';
 import { LoginEmailDto } from '../../adapter/dtos/auth/login-email.dto';
 import { RegisterDto } from '../../adapter/dtos/auth/register.dto';
@@ -27,10 +28,8 @@ export class AuthServiceImplement implements AuthServiceInterface {
   @Inject(() => UserServiceImplement)
   private userService: UserServiceInterface;
 
-  loginEmail = async (
-    data: LoginEmailDto,
-  ): Promise<UserDomain | JwtDto | null> => {
-    const user = await this.userRepo.getUserByEmail(data.email);
+  loginEmail = async (data: LoginEmailDto): Promise<JwtDto | null> => {
+    const user = await this.userRepo.findUserByEmail(data.email);
     if (!user) {
       throw new NoDataFound('Email Not Found');
     }
@@ -53,7 +52,7 @@ export class AuthServiceImplement implements AuthServiceInterface {
   };
 
   register = async (data: RegisterDto) => {
-    const existedUser = await this.userRepo.getUserByEmail(data.email);
+    const existedUser = await this.userRepo.findUserByEmail(data.email);
     if (existedUser) {
       throw new ExistedEmail();
     }
@@ -69,8 +68,12 @@ export class AuthServiceImplement implements AuthServiceInterface {
     createUserDto.password = data.password;
     createUserDto.role = Constants.USER_ROLE.USER;
     const userDomain = await this.userService.createUser(createUserDto);
+    const jwtPayload = new JwtPayloadDto();
+    jwtPayload.id = userDomain.id;
+    jwtPayload.role = userDomain.role;
+    jwtPayload.username = userDomain.username;
     const { accessToken, refreshToken, expireIn } =
-      await this.getTokenData(userDomain);
+      await this.getTokenData(jwtPayload);
     const jwtDto = new JwtDto();
     jwtDto.accessToken = accessToken;
     jwtDto.refreshToken = refreshToken;
@@ -78,7 +81,7 @@ export class AuthServiceImplement implements AuthServiceInterface {
     return jwtDto;
   };
 
-  getTokenData = async (user: UserDomain): Promise<any> => {
+  getTokenData = async (user: JwtPayloadDto): Promise<JwtDto> => {
     const accessToken = jwt.sign(
       {
         id: user.id,

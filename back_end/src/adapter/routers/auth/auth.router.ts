@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import passport from 'passport';
 import { Container } from 'typedi';
 
 import { AsyncHandler } from '../../../common/utils/AsyncHandler';
@@ -22,5 +23,19 @@ router.post(
   AsyncHandler(authController.register),
 );
 
-router.get('/login-google');
+// login-google
+router.get(
+  '/login-google',
+  passport.authenticate('google', { scope: ['profile', 'email'] }),
+);
+
+router.get(
+  '/google/callback',
+  passport.authenticate('google', {
+    failureRedirect: 'http:/localhost:5173/login/failed',
+    session: false,
+    // successRedirect: 'http://localhoat:5173',
+  }),
+  AsyncHandler(authController.loginGoogle),
+);
 export default router;

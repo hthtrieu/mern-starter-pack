@@ -16,6 +16,7 @@ const verifyToken = (req: Request, res: Response, next: NextFunction): any => {
     jwt.verify(token, String(process.env.JWT_SECRET), (err, user) => {
       if (err) return new AccessTokenErrorResponse('Invalid Token').send(res);
       (req as any).user = user;
+      // req.user = user;
       next();
     });
   } else {

@@ -1,9 +1,11 @@
 // services/user/UserServiceImplement.ts
-import { CreateUserDto } from 'src/adapter/dtos/user/create-user.dto';
 import { Container, Inject, Service } from 'typedi';
 
+import { CreateUserDto } from '../..//adapter/dtos/user/create-user.dto';
+import { JwtPayloadDto } from '../../adapter/dtos/auth/jwt-payload.dto';
 import { UpdateUserDTO } from '../../adapter/dtos/user/update-user.dto';
 import { UserMapper } from '../../adapter/mappers/user/user.mapper';
+import { Constants } from '../../common/utils/Constant';
 import { UserDomain } from '../../domain/user.domain';
 import { User } from '../../infrastructure/entities/User';
 import { UserRepositoryInterface } from '../../infrastructure/repositories/user/user-repository.interface';
@@ -25,6 +27,31 @@ export class UserServiceImplement implements UserServiceInterface {
     domain.email = userData.email;
     domain.username = userData.username;
     domain.password = userData.password;
+    const userDomain = await this.userRepo.createUser(userData);
+    return userDomain;
+  };
+
+  getUserProfileByToken = async (user: JwtPayloadDto): Promise<any> => {
+    if (!user?.id) {
+      return null;
+    }
+    const userDomain = await this.userRepo.findUserById(user.id);
+    return userDomain;
+  };
+
+  findUserByEmail = async (email: string): Promise<UserDomain | null> => {
+    const user = await this.userRepo.findUserByEmail(email);
+    return user;
+  };
+
+  createUserBySocical = async (
+    userData: CreateUserDto,
+  ): Promise<UserDomain> => {
+    const domain = new UserDomain();
+    domain.email = userData.email;
+    domain.username = userData.username;
+    domain.password = 'random password';
+    domain.role = Constants.USER_ROLE.USER;
     const userDomain = await this.userRepo.createUser(userData);
     return userDomain;
   };

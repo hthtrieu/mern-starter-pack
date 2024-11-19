@@ -55,10 +55,10 @@ export const AppDataSource = new DataSource({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
   synchronize: false, // Đừng tự động đồng bộ hóa DB
-  logging: true,
+  logging: false,
   entities: [__dirname + '/../entities/*.ts'], // Đường dẫn tới các entity
   migrations: [__dirname + '/migrations/*.ts'], // Đường dẫn tới các migrations
-  seeds: [MainSeeder], // Nếu bạn muốn sử dụng seeding
+  seeds: [MainSeeder],
   cli: {
     migrationsDir: 'src/infrastructure/database/migrations', // Thư mục chứa migrations
     entitiesDir: 'src/infrastructure/database/entities', // Thư mục chứa entities

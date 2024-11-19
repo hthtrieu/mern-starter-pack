@@ -16,7 +16,9 @@ export class UserRepository implements UserRepositoryInterface {
     this.usersRepository = AppDataSource.getRepository(User); // Tạo repository từ DataSource
   }
 
-  public getUserByEmail = async (email: string): Promise<UserDomain | null> => {
+  public findUserByEmail = async (
+    email: string,
+  ): Promise<UserDomain | null> => {
     const user = await this.usersRepository.findOneBy({ email: email });
     if (user) return UserMapper.toDomain(user);
     return null;
@@ -26,6 +28,12 @@ export class UserRepository implements UserRepositoryInterface {
     username: string,
   ): Promise<UserDomain | null> => {
     const user = await this.usersRepository.findOneBy({ username: username });
+    if (user) return UserMapper.toDomain(user);
+    return null;
+  };
+
+  public findUserById = async (userId: number): Promise<UserDomain | null> => {
+    const user = await this.usersRepository.findOneBy({ id: userId });
     if (user) return UserMapper.toDomain(user);
     return null;
   };
