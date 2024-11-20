@@ -9,6 +9,7 @@ import {
 
 import PageNotFound from '@/components/common/PageNotFound';
 import RequireAuth from '@/components/common/RequireAuth';
+import AuthLayout from '@/components/layout/AuthLayout';
 import MainLayout from '@/components/layout/MainLayout';
 import Constants from '@/lib/Constants';
 
@@ -41,39 +42,39 @@ const CustomRouterProvider = () => {
             })}
           </>
         </Route>
-        {/* <Route path="/user" element={<AuthLayout />}>
-            {protectedRoutes.map((route, index) => (
+        <Route path="/user" element={<AuthLayout />}>
+          {protectedRoutes.map((route, index) => (
+            <Route
+              key={index}
+              path={route.path}
+              element={
+                <RequireAuth
+                  allowedRoles={[Constants.ROLE.USER, Constants.ROLE.ADMIN]}
+                >
+                  <route.component />
+                </RequireAuth>
+              }
+            />
+          ))}
+        </Route>
+        {/* <Route path="/admin" element={<AdminLayout />}>
+          {privateRouters.map((route: any, index: number) => {
+            const Page = route.component;
+            return (
               <Route
                 key={index}
                 path={route.path}
                 element={
-                  <RequireAuth
-                    allowedRoles={[Constants.ROLE.USER, Constants.ROLE.ADMIN]}
-                  >
-                    <route.component />
-                  </RequireAuth>
+                  <>
+                    <RequireAuth allowedRoles={[Constants.ROLE.ADMIN]}>
+                      <Page />
+                    </RequireAuth>
+                  </>
                 }
               />
-            ))}
-          </Route>
-          <Route path="/admin" element={<AdminLayout />}>
-            {privateRouters.map((route: any, index: number) => {
-              const Page = route.component;
-              return (
-                <Route
-                  key={index}
-                  path={route.path}
-                  element={
-                    <>
-                      <RequireAuth allowedRoles={[Constants.ROLE.ADMIN]}>
-                        <Page />
-                      </RequireAuth>
-                    </>
-                  }
-                />
-              );
-            })}
-          </Route> */}
+            );
+          })}
+        </Route> */}
         <Route
           path="*"
           element={

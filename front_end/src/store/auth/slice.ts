@@ -1,12 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import Constants from '@/lib/Constants';
 import { getItem, removeItem, setItem } from '@/lib/LocalStorage';
 
-const initialState = {
+interface UserProfileType {
+  id: number;
+  username: string;
+  role: number;
+  email?: string;
+}
+export interface AuthState {
+  isLoading: boolean;
+  token: string;
+  refreshToken: string;
+  loggedIn: boolean;
+  profile?: UserProfileType | null;
+}
+const initialState: AuthState = {
   isLoading: false,
-  token: getItem('accessToken') || '',
-  refresh_token: getItem('refreshToken') || '',
-  loggedIn: !!getItem('accessToken'),
+  token: getItem(Constants.ACCESS_TOKEN) || '',
+  refreshToken: getItem(Constants.REFRESH_TOKEN) || '',
+  loggedIn: !!getItem(Constants.ACCESS_TOKEN),
   profile: null,
 };
 
@@ -21,11 +35,12 @@ const authSlice = createSlice({
     },
 
     loginActionSuccess: (state, { payload }) => {
+      console.log('login google success: ', payload);
       state.isLoading = false;
-      setItem('access_token', payload.data.accessToken);
-      setItem('refresh_token', payload.data.refreshToken);
+      setItem(Constants.ACCESS_TOKEN, payload.data.accessToken);
+      setItem(Constants.REFRESH_TOKEN, payload.data.refreshToken);
       state.token = String(payload.data.accessToken);
-      state.refresh_token = String(payload.data.refreshToken);
+      state.refreshToken = String(payload.data.refreshToken);
       state.loggedIn = true;
     },
 
@@ -77,14 +92,14 @@ const authSlice = createSlice({
     logoutSuccessAction: (state) => {
       state.loggedIn = false;
       state.isLoading = false;
-      removeItem('accessToken');
-      removeItem('refreshToken');
+      removeItem(Constants.ACCESS_TOKEN);
+      removeItem(Constants.REFRESH_TOKEN);
     },
     logoutErrorsAction: (state) => {
       state.loggedIn = false;
       state.isLoading = false;
-      removeItem('accessToken');
-      removeItem('refreshToken');
+      removeItem(Constants.ACCESS_TOKEN);
+      removeItem(Constants.REFRESH_TOKEN);
     },
   },
 });

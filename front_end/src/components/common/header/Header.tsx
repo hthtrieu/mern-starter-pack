@@ -5,6 +5,9 @@ import { Link, NavLink } from 'react-router-dom';
 import { LoginForm } from '@/components/auth/login/LoginForm';
 import { RegisterForm } from '@/components/auth/register/RegisterForm';
 import UserPopover from '@/components/auth/user-popover/UserPopover';
+import ModeButton from '@/components/themes/ModeButton';
+import { ModeToggle } from '@/components/themes/ModeToggle';
+import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
 
@@ -25,7 +28,7 @@ const Header = () => {
     <header className="sticky start-0 top-0 z-20 w-full border-none bg-white/80 shadow backdrop-blur transition-all supports-[backdrop-filter]:bg-white/75 dark:bg-gray-800">
       <MaxWidthWrapper>
         <nav className="w-full">
-          <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
+          <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between py-2">
             <div className="">
               <NavLink
                 to={'/'}
@@ -35,53 +38,40 @@ const Header = () => {
               </NavLink>
             </div>
             <div className="w-full md:block md:w-auto">
-              {/* <ul className="mt-4 flex flex-row p-4 font-medium md:mt-0 md:flex-row md:space-x-8 md:border-0 md:p-0 rtl:space-x-reverse">
-                {links.map((link, index: number) => {
-                  return (
-                    <li key={index}>
-                      <NavLink
-                        to={link.path}
-                        // className={cn(
-                        //   'rounded px-3 py-2 text-blue-900 hover:bg-gray-100 dark:text-white dark:hover:bg-blue-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-yellow-700 md:dark:hover:bg-transparent md:dark:hover:text-yellow-500',
-                        // )}
-                      >
-                        {link.title}
-                      </NavLink>
-                    </li>
-                  );
-                })}
-              </ul> */}
-              {loggedIn ? (
-                <>
-                  <UserPopover />
-                  <div></div>
-                </>
-              ) : (
-                <div className="mt-4 flex flex-row p-4 font-medium md:mt-0 md:flex-row md:space-x-8 md:border-0 md:p-0 rtl:space-x-reverse">
-                  <Dialog
-                    open={openDialogLogin}
-                    onOpenChange={setOpenDialogLogin}
-                  >
-                    <DialogTrigger className="w-fit rounded-sm bg-background p-1 text-sm font-semibold hover:dark:text-inherit">
-                      Sign in
-                    </DialogTrigger>
-                    <DialogContent>
-                      <LoginForm setOpen={setOpenDialogLogin} />
-                    </DialogContent>
-                  </Dialog>
-                  <Dialog
-                    open={openDialogRegister}
-                    onOpenChange={setOpenDialogRegister}
-                  >
-                    <DialogTrigger className="w-fit rounded-sm bg-background p-1 text-sm font-semibold hover:dark:text-inherit">
-                      Sign up
-                    </DialogTrigger>
-                    <DialogContent>
-                      <RegisterForm setOpen={setOpenDialogRegister} />
-                    </DialogContent>
-                  </Dialog>
-                </div>
-              )}
+              <div className="mt-4 flex flex-row items-center font-medium md:mt-0 md:flex-row md:space-x-8 md:border-0 md:p-0 rtl:space-x-reverse">
+                {loggedIn ? (
+                  <>
+                    <UserPopover />
+                    <div></div>
+                  </>
+                ) : (
+                  <div className="flex gap-1">
+                    <Dialog
+                      open={openDialogLogin}
+                      onOpenChange={setOpenDialogLogin}
+                    >
+                      <DialogTrigger className="w-fit rounded-sm bg-background p-1 text-sm font-semibold hover:dark:text-inherit">
+                        <Button variant={'outline'}>Sign in</Button>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <LoginForm setOpen={setOpenDialogLogin} />
+                      </DialogContent>
+                    </Dialog>
+                    <Dialog
+                      open={openDialogRegister}
+                      onOpenChange={setOpenDialogRegister}
+                    >
+                      <DialogTrigger className="w-fit rounded-sm bg-background p-1 text-sm font-semibold hover:dark:text-inherit">
+                        <Button>Sign up</Button>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <RegisterForm setOpen={setOpenDialogRegister} />
+                      </DialogContent>
+                    </Dialog>
+                  </div>
+                )}
+                <ModeButton />
+              </div>
             </div>
           </div>
         </nav>

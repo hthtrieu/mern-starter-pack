@@ -79,24 +79,24 @@ export const shuffleArray = (array: any[]) => {
   return newArray.sort(() => Math.random() - 1); // Corrected sorting logic
 };
 
-export const setColorLevel = (level: string) => {
-  switch (level) {
-    case Constants.LEVEL[0]:
-      return 'bg-green-500 hover:bg-green-500 text-white';
-    case Constants.LEVEL[1]:
-      return 'bg-primary hover:bg-primary';
-    case Constants.LEVEL[2]:
-      return 'bg-yellow-500 hover:bg-yellow-500 text-white';
-    case Constants.LEVEL[3]:
-      return 'bg-red-500 hover:bg-red-500 text-white';
-    default:
-      return 'bg-primary';
-  }
-};
+// export const setColorLevel = (level: string) => {
+//   switch (level) {
+//     case Constants.LEVEL[0]:
+//       return 'bg-green-500 hover:bg-green-500 text-white';
+//     case Constants.LEVEL[1]:
+//       return 'bg-primary hover:bg-primary';
+//     case Constants.LEVEL[2]:
+//       return 'bg-yellow-500 hover:bg-yellow-500 text-white';
+//     case Constants.LEVEL[3]:
+//       return 'bg-red-500 hover:bg-red-500 text-white';
+//     default:
+//       return 'bg-primary';
+//   }
+// };
 
 export const getUserJWTDecode = (): JwtPayload | any => {
-  const token = localStorage.getItem('access_token')
-    ? JSON.parse(localStorage.getItem('access_token') || '')
+  const token = localStorage.getItem(Constants.ACCESS_TOKEN)
+    ? JSON.parse(localStorage.getItem(Constants.ACCESS_TOKEN) || '')
     : '';
   if (!token) {
     return null;

@@ -5,9 +5,8 @@ interface LevelMap {
 }
 
 export default class Constants {
-  static ACCESS_TOKEN = 'access_token';
-  static REFRESH_TOKEN = 'refresh_token';
-  static PUBLIC_ROUTES = ['/', '/services', '/jobs', '/case-study', '/inquiry'];
+  static ACCESS_TOKEN = 'accessToken';
+  static REFRESH_TOKEN = 'refreshToken';
 
   static INPUT_TYPE = {
     TEXT: 'text',
@@ -67,35 +66,17 @@ export default class Constants {
   };
 
   static SidebarNavItems = [
-    {
-      href: routerPaths.ADMIN_SETS,
-      title: 'Sets',
-    },
-    {
-      href: routerPaths.ADMIN_PENDING_SETS,
-      title: 'Pending Sets',
-    },
-    {
-      href: routerPaths.ADMIN_SETS_MULTIPLE_CHOICE_TEST,
-      title: 'Tests',
-    },
+    // {
+    //   href: routerPaths.ADMIN_SETS,
+    //   title: 'Sets',
+    // },
+    // {
+    //   href: routerPaths.ADMIN_PENDING_SETS,
+    //   title: 'Pending Sets',
+    // },
+    // {
+    //   href: routerPaths.ADMIN_SETS_MULTIPLE_CHOICE_TEST,
+    //   title: 'Tests',
+    // },
   ];
-  static QUESTION_TYPE = {
-    CHOICE: 'choice',
-    IMAGE: 'image',
-    WRITTEN: 'written',
-  };
-  static LEVEL: LevelMap = {
-    1: 'Easy',
-    2: 'Medium',
-    3: 'Hard',
-  };
-  static SET_STATUS = {
-    DRAFT: 'draft',
-    PUBLISHED: 'published',
-    ARCHIVED: 'archived',
-    PENDING: 'pending',
-    APPROVED: 'approved',
-    REJECTED: 'rejected',
-  };
 }

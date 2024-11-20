@@ -1,4 +1,5 @@
 import { lazy } from 'react';
+
 import MainLayout from '@/components/layout/MainLayout';
 
 import { routerPaths } from './path';
@@ -9,6 +10,7 @@ const ForgotPassword = lazy(
 );
 const UnAuthorized = lazy(() => import('@/components/common/UnAuthorized'));
 const Profile = lazy(() => import('@/pages/profile/Profile'));
+const LoginGoogle = lazy(() => import('@/pages/auth/LoginGoogle'));
 
 const publicRoutes = [
   {
@@ -24,6 +26,10 @@ const publicRoutes = [
   {
     path: routerPaths.UNAUTHORIZED,
     component: UnAuthorized,
+  },
+  {
+    path: routerPaths.LOGIN_GOOGLE,
+    component: LoginGoogle,
   },
 ];
 const protectedRoutes = [

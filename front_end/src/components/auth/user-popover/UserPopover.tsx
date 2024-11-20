@@ -1,4 +1,5 @@
 import { routerPaths } from '@/routes/path';
+import { logoutAction } from '@/store/auth/slice';
 import {
   CircleUserRound,
   History,
@@ -17,7 +18,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { logoutAction } from '@/store/auth/slice';
 import { getUserJWTDecode } from '@/lib/utils';
 
 const userProfile = getUserJWTDecode() || {};
@@ -41,12 +41,11 @@ const UserPopover = () => {
   };
   return (
     <Popover>
-      <PopoverTrigger className="flex items-center gap-2 p-1 text-sm">
+      <PopoverTrigger className="flex items-center gap-2 text-sm">
         <Avatar>
           <AvatarImage src={profile?.avatar || ''} className="object-cover" />
           <AvatarFallback>
-            {' '}
-            <User className="h-28 w-28" />
+            <User className="h-20 w-20" />
           </AvatarFallback>
         </Avatar>
         {profile?.username || userProfile?.username || ''}
@@ -62,7 +61,7 @@ const UserPopover = () => {
               Profile
             </Button>
           </Link>
-                <Button
+          <Button
             className="items- grid grid-cols-2 gap-4"
             variant={'ghost'}
             onClick={logout}

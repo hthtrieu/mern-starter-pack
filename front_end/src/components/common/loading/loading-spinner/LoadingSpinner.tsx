@@ -1,9 +1,10 @@
 import { Skeleton } from '@/components/ui/skeleton';
+import { cn } from '@/lib/utils';
 
 const LoadingSpinner = (props: any) => {
-  const { color, size } = props;
+  const { color, size, className } = props;
   return (
-    <>
+    <div className={cn('', className)}>
       <div role="status">
         <svg
           aria-hidden="true"
@@ -23,7 +24,7 @@ const LoadingSpinner = (props: any) => {
         </svg>
         <span className="sr-only">Loading...</span>
       </div>
-    </>
+    </div>
   );
 };
 

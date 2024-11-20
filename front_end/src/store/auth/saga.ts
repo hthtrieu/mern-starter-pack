@@ -18,6 +18,7 @@ import {
   logoutApi,
   SignupApi,
 } from '@/api/AuthApi';
+import Constants from '@/lib/Constants';
 // import actions from "./action";
 import ApiCode from '@/lib/enums/ApiCode';
 import { ErrorCode } from '@/lib/enums/ErrorCode';
@@ -123,7 +124,7 @@ function* watchGetNewAccessToken() {
     function* ({ payload }: any): Generator<any, void, any> {
       const { onSuccess, onError } = payload;
       try {
-        const refresh_token = localStorage.getItem('refresh_token');
+        const refresh_token = localStorage.getItem(Constants.REFRESH_TOKEN);
         if (refresh_token === null) {
           onError && onError();
           return;

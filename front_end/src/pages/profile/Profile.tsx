@@ -1,4 +1,6 @@
 import { useEffect, useMemo } from 'react';
+import { getProfileAction } from '@/store/auth/slice';
+import { editUserAction } from '@/store/user-profile/slice';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -12,8 +14,6 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Form } from '@/components/ui/form';
 import { toast } from '@/components/ui/use-toast';
-import { getProfileAction } from '@/redux/auth/slice';
-import { editUserAction } from '@/redux/user-profile/slice';
 import Constants from '@/lib/Constants';
 import { objectToFormData } from '@/lib/utils';
 
@@ -113,7 +113,7 @@ const Profile = () => {
   return (
     <div>
       <LoadingPopup open={isLoading} />
-      <Card className="py-6">
+      <Card className="p-6">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}

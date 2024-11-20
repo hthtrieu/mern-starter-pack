@@ -6,6 +6,7 @@ import axios, {
 } from 'axios';
 
 import { refreshTokenApi } from '@/api/AuthApi';
+import Constants from '@/lib/Constants';
 import { ErrorCode } from '@/lib/enums/ErrorCode';
 import { getItem, removeItem, setItem } from '@/lib/LocalStorage';
 
@@ -14,7 +15,7 @@ import { getItem, removeItem, setItem } from '@/lib/LocalStorage';
 const onRequest = (
   config: InternalAxiosRequestConfig,
 ): InternalAxiosRequestConfig => {
-  const ACCESS_TOKEN = getItem('access_token');
+  const ACCESS_TOKEN = getItem(Constants.ACCESS_TOKEN);
   if (ACCESS_TOKEN) {
     config.headers.Authorization = `Bearer ${ACCESS_TOKEN}`;
   }
@@ -31,15 +32,15 @@ const onResponseSuccess = (response: AxiosResponse): AxiosResponse => {
 
 const onResponseError = (error: AxiosError) => {
   if (error.response?.status === ErrorCode.UNAUTHORIZED) {
-    removeItem('access_token');
+    removeItem(Constants.ACCESS_TOKEN);
     return Promise.reject(error);
   }
-  return refreshToken(error); // gọi hàm để refresh token.
+  // return refreshToken(error); // gọi hàm để refresh token.
 };
 
 // hàm để refresh token
 const refreshToken = async (error: AxiosError) => {
-  const refreshToken = getItem('refresh_token');
+  const refreshToken = getItem(Constants.REFRESH_TOKEN);
   if (!refreshToken) {
     // logout();
     return;
@@ -49,8 +50,8 @@ const refreshToken = async (error: AxiosError) => {
       return;
     }
     const response = await refreshTokenApi(refreshToken); // call api get new token
-    setItem('access_token', response.data?.data?.accessToken);
-    setItem('refresh_token', response.data?.data?.refreshToken);
+    setItem(Constants.ACCESS_TOKEN, response.data?.data?.accessToken);
+    setItem(Constants.REFRESH_TOKEN, response.data?.data?.refreshToken);
     if (!error) {
       return;
     }

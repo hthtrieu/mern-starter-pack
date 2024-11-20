@@ -1,9 +1,9 @@
 import { ReactNode, useEffect, useState } from 'react';
 import { routerPaths } from '@/routes/path';
+import { getProfileAction } from '@/store/auth/slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
-import { getProfileAction } from '@/redux/auth/slice';
 import { getUserJWTDecode } from '@/lib/utils';
 
 const userProfile = getUserJWTDecode();
