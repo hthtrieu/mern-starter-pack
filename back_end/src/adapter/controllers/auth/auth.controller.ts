@@ -60,7 +60,7 @@ export class AuthController {
         await this.authService.getTokenData(jwtPayloadDto);
 
       res.redirect(
-        `http://localhost:5173/login-google/success?accessToken=${accessToken}`,
+        `http://localhost:5173/login-google/success?accessToken=${accessToken}&refreshToken=${refreshToken}`,
       );
     }
   };
