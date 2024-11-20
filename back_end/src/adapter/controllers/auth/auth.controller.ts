@@ -1,8 +1,10 @@
 import { Request, Response } from 'express';
 import { Container, Inject, Service } from 'typedi';
 
+import { JwtPayloadType } from '../../../common/types/JwtPayloadType';
 import {
   ApiResponse,
+  FailureMsgResponse,
   SuccessResponse,
 } from '../../../common/utils/ApiResponse';
 import { UserDomain } from '../../../domain/user.domain';
@@ -28,7 +30,7 @@ export class AuthController {
       new LoginEmailDto(req.body.email, req.body.password),
     );
 
-    return new SuccessResponse('login succeed List', jwtDto).send(res);
+    return new SuccessResponse('login succeed', jwtDto).send(res);
   };
 
   register = async (req: Request, res: Response): Promise<Response> => {
@@ -56,15 +58,22 @@ export class AuthController {
 
       const { accessToken, refreshToken, expireIn } =
         await this.authService.getTokenData(jwtPayloadDto);
-      // return new SuccessResponse('login succeed List', {
-      //   accessToken,
-      //   refreshToken,
-      //   expireIn,
-      // }).send(res);
 
       res.redirect(
         `http://localhost:5173/login-google/success?accessToken=${accessToken}`,
       );
     }
+  };
+  me = async (req: Request, res: Response): Promise<Response> => {
+    const user = await this.authService.me(req?.user as JwtPayloadType);
+    if (user) {
+      return new SuccessResponse('User Profile', {
+        id: user.id,
+        email: user.email,
+        username: user.username,
+        role: user.role,
+      }).send(res);
+    }
+    return new FailureMsgResponse('User not found').send(res);
   };
 }

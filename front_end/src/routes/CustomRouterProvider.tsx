@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   Navigate,
   Route,
-  BrowserRouter as Router,
+  // BrowserRouter as Router,
   Routes,
 } from 'react-router-dom';
 
@@ -30,20 +30,18 @@ const CustomRouterProvider = () => {
   //     })
   // }, [profile])
   return (
-    <Router>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route path="/" element={<MainLayout />}>
-            <>
-              {publicRoutes.map((route: any, index: number) => {
-                const Page = route.component;
-                return (
-                  <Route key={index} path={route.path} element={<Page />} />
-                );
-              })}
-            </>
-          </Route>
-          {/* <Route path="/user" element={<AuthLayout />}>
+    // <Router>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <>
+            {publicRoutes.map((route: any, index: number) => {
+              const Page = route.component;
+              return <Route key={index} path={route.path} element={<Page />} />;
+            })}
+          </>
+        </Route>
+        {/* <Route path="/user" element={<AuthLayout />}>
             {protectedRoutes.map((route, index) => (
               <Route
                 key={index}
@@ -76,17 +74,17 @@ const CustomRouterProvider = () => {
               );
             })}
           </Route> */}
-          <Route
-            path="*"
-            element={
-              <MainLayout>
-                <PageNotFound />
-              </MainLayout>
-            }
-          />
-        </Routes>
-      </Suspense>
-    </Router>
+        <Route
+          path="*"
+          element={
+            <MainLayout>
+              <PageNotFound />
+            </MainLayout>
+          }
+        />
+      </Routes>
+    </Suspense>
+    // </Router>
   );
 };
 

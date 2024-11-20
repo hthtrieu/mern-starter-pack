@@ -12,5 +12,7 @@ export interface UserServiceInterface {
 
   findUserByEmail: (email: string) => Promise<UserDomain | null>;
 
+  findUserById: (id: number) => Promise<UserDomain | null>;
+
   createUserBySocical: (userData: CreateUserDto) => Promise<UserDomain>;
 }

@@ -5,7 +5,7 @@ import { AxiosConfig } from './AxiosConfig';
 const BASE_URL = import.meta.env.VITE_API_URL + '/api/auth';
 
 export const LoginApi = async (data: any) => {
-  const response = await AxiosConfig.post(`${BASE_URL}/sign-in`, data);
+  const response = await AxiosConfig.post(`${BASE_URL}/login-email`, data);
   return response;
 };
 

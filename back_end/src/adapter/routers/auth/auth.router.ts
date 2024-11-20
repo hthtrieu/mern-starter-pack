@@ -38,4 +38,10 @@ router.get(
   }),
   AsyncHandler(authController.loginGoogle),
 );
+
+router.get(
+  '/me',
+  passport.authenticate('jwt', { session: false }),
+  AsyncHandler(authController.me),
+);
 export default router;

@@ -7,7 +7,9 @@ import { UserDomain } from '../../domain/user.domain';
 export interface AuthServiceInterface {
   loginEmail: (data: LoginEmailDto) => Promise<JwtDto | null>;
 
-  register: (data: RegisterDto) => Promise<any>;
+  register: (data: RegisterDto) => Promise<JwtDto>;
 
   getTokenData: (data: JwtPayloadDto) => Promise<JwtDto>;
+
+  me: (user: JwtPayloadDto) => Promise<UserDomain | null>;
 }

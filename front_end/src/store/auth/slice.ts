@@ -4,9 +4,9 @@ import { getItem, removeItem, setItem } from '@/lib/LocalStorage';
 
 const initialState = {
   isLoading: false,
-  token: getItem('access_token') || '',
-  refresh_token: getItem('refresh_token') || '',
-  loggedIn: !!getItem('access_token'),
+  token: getItem('accessToken') || '',
+  refresh_token: getItem('refreshToken') || '',
+  loggedIn: !!getItem('accessToken'),
   profile: null,
 };
 
@@ -22,10 +22,10 @@ const authSlice = createSlice({
 
     loginActionSuccess: (state, { payload }) => {
       state.isLoading = false;
-      setItem('access_token', payload.data.access_token);
-      setItem('refresh_token', payload.data.access_token);
-      state.token = String(payload.data.access_token);
-      state.refresh_token = String(payload.data.refresh_token);
+      setItem('access_token', payload.data.accessToken);
+      setItem('refresh_token', payload.data.refreshToken);
+      state.token = String(payload.data.accessToken);
+      state.refresh_token = String(payload.data.refreshToken);
       state.loggedIn = true;
     },
 
@@ -77,14 +77,14 @@ const authSlice = createSlice({
     logoutSuccessAction: (state) => {
       state.loggedIn = false;
       state.isLoading = false;
-      removeItem('access_token');
-      removeItem('refresh_token');
+      removeItem('accessToken');
+      removeItem('refreshToken');
     },
     logoutErrorsAction: (state) => {
       state.loggedIn = false;
       state.isLoading = false;
-      removeItem('access_token');
-      removeItem('refresh_token');
+      removeItem('accessToken');
+      removeItem('refreshToken');
     },
   },
 });

@@ -81,6 +81,14 @@ export class AuthServiceImplement implements AuthServiceInterface {
     return jwtDto;
   };
 
+  me = async (user: JwtPayloadDto): Promise<UserDomain | null> => {
+    if (!user?.id) {
+      return null;
+    }
+    const userDomain = await this.userService.findUserById(user.id);
+    return userDomain;
+  };
+
   getTokenData = async (user: JwtPayloadDto): Promise<JwtDto> => {
     const accessToken = jwt.sign(
       {

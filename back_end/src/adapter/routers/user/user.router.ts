@@ -23,13 +23,4 @@ router.post(
   AsyncHandler(userController.updateUser),
 );
 
-router.get(
-  '/me',
-  [
-    validator(schema.auth, ValidationSource.HEADER),
-    passport.authenticate('jwt', { session: false }),
-  ],
-  AsyncHandler(userController.getUserProfile),
-);
-
 export default router;

@@ -35,7 +35,7 @@ export function LoginForm(props: any) {
   const navigate = useNavigate();
   const { setOpen } = props;
   const formSchema = z.object({
-    username: z.string().min(2, {
+    email: z.string().min(2, {
       message: t('login.invalidUsername'),
     }),
     password: z.string().min(6, {
@@ -45,7 +45,7 @@ export function LoginForm(props: any) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: '',
+      email: '',
       password: '',
     },
   });
@@ -85,7 +85,7 @@ export function LoginForm(props: any) {
     navigate(routerPaths.FORGOT_PASSWORD);
   };
   const googleAuth = () => {
-    window.open(`${BACKEND_URL}/auth/login-google`, '_self');
+    window.open(`${BACKEND_URL}/api/auth/login-google`, '_self');
   };
   return (
     <>
@@ -102,10 +102,10 @@ export function LoginForm(props: any) {
               <div className="space-y-1">
                 <FormInput
                   control={form.control}
-                  fieldName="username"
-                  label="Username"
-                  placeholder="Username"
-                  type={Constants.INPUT_TYPE.TEXT}
+                  fieldName="email"
+                  label="Email"
+                  placeholder="Email"
+                  type={Constants.INPUT_TYPE.EMAIL}
                   required={true}
                 />
               </div>

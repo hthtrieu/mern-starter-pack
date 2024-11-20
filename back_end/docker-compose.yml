@@ -3,6 +3,7 @@ version: '3.8'
 services:
   db:
     image: 'postgres:15'
+    container_name: postgres${APP_NAME}
     ports:
       - '${DB_PORT:-5432}:5432'
     environment:
@@ -16,11 +17,11 @@ services:
       - app-network
   redis:
     image: redis:alpine
-    container_name: elearning-redis
+    container_name: redis_${APP_NAME}
     ports:
       - '6379:6379'
     volumes:
-      - ./docker/data-redis:/data
+      - .docker/data-redis:/data
     networks:
       - app-network
   minio:

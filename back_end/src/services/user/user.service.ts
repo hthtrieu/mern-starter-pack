@@ -44,6 +44,11 @@ export class UserServiceImplement implements UserServiceInterface {
     return user;
   };
 
+  findUserById = async (id: number): Promise<UserDomain | null> => {
+    const user = await this.userRepo.findUserById(id);
+    return user;
+  };
+
   createUserBySocical = async (
     userData: CreateUserDto,
   ): Promise<UserDomain> => {
