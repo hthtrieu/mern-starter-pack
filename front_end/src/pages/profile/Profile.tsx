@@ -119,13 +119,13 @@ const Profile = () => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="m-auto space-y-8 sm:w-full lg:w-2/4"
           >
-            <FormInput
+            {/* <FormInput
               control={form.control}
               fieldName={`image`}
               label="Avatar"
               type={Constants.INPUT_TYPE.AVATAR}
               classNameInput="h-fit"
-            />
+            /> */}
             <FormInput
               control={form.control}
               fieldName="email"
@@ -140,6 +140,13 @@ const Profile = () => {
               label="Username"
               placeholder="Username"
               type={Constants.INPUT_TYPE.TEXT}
+            />
+            <FormInput
+              control={form.control}
+              fieldName={`image`}
+              label="Avatar"
+              type={Constants.INPUT_TYPE.FILE_UPLOAD_PRESIGNED}
+              classNameInput="h-fit"
             />
             <div className="flex w-full justify-end">
               <EditPopup

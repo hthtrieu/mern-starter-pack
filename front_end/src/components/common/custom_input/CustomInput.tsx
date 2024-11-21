@@ -25,6 +25,7 @@ import { cn, isFunction } from '@/lib/utils';
 
 import { AvatarInput } from './avatar/AvatarInput';
 import { FileDropzone } from './file-dropzone/FileDropzone';
+import { FileDropzonePresigned } from './file-dropzone/FileDropzonePresigned';
 
 export const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
   (
@@ -252,6 +253,21 @@ const renderInput = ({
           onClickIcon={onClickIcon}
         />
       );
+    case Constants.INPUT_TYPE.FILE_UPLOAD_PRESIGNED:
+      return (
+        <FileDropzonePresigned
+          {...field}
+          type={type}
+          placeholder={placeholder}
+          className={classNameInput}
+          onChange={onChange}
+          onKeyUp={onKeyUp}
+          maxLength={maxLength}
+          disabled={disabled}
+          readOnly={readOnly}
+          onClickIcon={onClickIcon}
+        />
+      );
     case Constants.INPUT_TYPE.AVATAR:
       return (
         <AvatarInput
@@ -263,7 +279,7 @@ const renderInput = ({
           onKeyUp={onKeyUp}
           maxLength={maxLength}
           disabled={disabled}
-          readOnly={readOnly}   
+          readOnly={readOnly}
           onClickIcon={onClickIcon}
         />
       );

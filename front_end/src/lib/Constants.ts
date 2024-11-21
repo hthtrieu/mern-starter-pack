@@ -24,6 +24,7 @@ export default class Constants {
     INPUT_CHECK: 'input_check',
     RE_CAPTCHA: 're_captcha',
     AVATAR: 'avatar',
+    FILE_UPLOAD_PRESIGNED: 'file_presigned',
   };
 
   static DEFAULT_PAGESIZE = 6;
